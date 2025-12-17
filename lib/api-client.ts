@@ -59,6 +59,15 @@ class APIClient {
     return data;
   }
 
+  async verifyEmail(token: string) {
+    const res = await fetch(`${API_URL}/auth/verify-email?token=${token}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!res.ok) throw new Error('Email verification failed');
+    return res.json();
+  }
+
   async login(data: LoginData) {
     const res = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
