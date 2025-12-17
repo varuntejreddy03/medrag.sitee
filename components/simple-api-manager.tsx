@@ -19,7 +19,7 @@ export function SimpleApiManager() {
     
     setLoading(true);
     try {
-      const res = await fetch('/api/proxy?path=/gi', {
+      const res = await fetch('/api/gi', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dob, provider, api_key: key }),
