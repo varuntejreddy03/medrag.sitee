@@ -123,52 +123,53 @@ export default function DashboardPage() {
       <canvas ref={canvasRef} className="fixed inset-0 w-full h-full opacity-30 mix-blend-screen pointer-events-none" />
       
       <header className="relative border-b border-zinc-800/50 bg-zinc-900/30 backdrop-blur-xl sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-5">
+        <div className="container mx-auto px-4 lg:px-6 py-4 lg:py-5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 lg:gap-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-md opacity-60"></div>
-                <div className="relative w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center">
-                  <Stethoscope className="w-6 h-6 text-white" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl blur-md opacity-60"></div>
+                <div className="relative w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center">
+                  <Stethoscope className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-white">Medical Dashboard</h1>
-                <p className="text-sm text-zinc-400">AI-Powered Diagnosis System</p>
+                <h1 className="text-lg lg:text-2xl font-bold text-white">Medical Dashboard</h1>
+                <p className="text-xs lg:text-sm text-zinc-400 hidden sm:block">AI-Powered Diagnosis System</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 lg:gap-3">
               <button
                 onClick={() => router.push('/diagnosis/new')}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all duration-200 flex items-center gap-2 font-medium shadow-lg hover:shadow-emerald-500/25"
+                className="px-3 lg:px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg lg:rounded-xl transition-all duration-200 flex items-center gap-1 lg:gap-2 font-medium shadow-lg hover:shadow-emerald-500/25 text-xs lg:text-sm"
               >
-                <Zap className="w-4 h-4" />
-                Demo Cases
+                <Zap className="w-3 h-3 lg:w-4 lg:h-4" />
+                <span className="hidden sm:inline">Demo</span>
               </button>
               <button
                 onClick={() => router.push('/diagnosis/new')}
-                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-200 flex items-center gap-2 font-semibold"
+                className="px-3 lg:px-6 py-2 lg:py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg lg:rounded-xl hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-200 flex items-center gap-1 lg:gap-2 font-semibold text-xs lg:text-sm"
               >
-                <Plus className="w-5 h-5" />
-                New Assessment
+                <Plus className="w-4 h-4 lg:w-5 lg:h-5" />
+                <span className="hidden sm:inline">New Assessment</span>
+                <span className="sm:hidden">New</span>
               </button>
               <button
                 onClick={async () => {
                   await api.logout();
                   router.push('/');
                 }}
-                className="px-4 py-3 bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 rounded-xl transition-all duration-200 flex items-center gap-2 backdrop-blur"
+                className="px-3 lg:px-4 py-2 lg:py-3 bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 rounded-lg lg:rounded-xl transition-all duration-200 flex items-center gap-1 lg:gap-2 backdrop-blur"
               >
-                <LogOut className="w-5 h-5" />
+                <LogOut className="w-4 h-4 lg:w-5 lg:h-5" />
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 lg:px-6 py-6 lg:py-8">
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8 fade-in">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8 fade-in">
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <div className="relative bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-2xl p-6 hover:bg-zinc-900/60 transition-all duration-300 hover:scale-105">

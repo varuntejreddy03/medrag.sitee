@@ -160,38 +160,39 @@ export default function NewDiagnosisPage() {
       <header className="border-b border-zinc-800/80 bg-zinc-900/50 backdrop-blur-xl">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <Brain className="w-8 h-8 text-blue-400" />
-            <h1 className="text-2xl font-bold text-white">MedRAG</h1>
+            <Brain className="w-6 h-6 lg:w-8 lg:h-8 text-blue-400" />
+            <h1 className="text-xl lg:text-2xl font-bold text-white">MedRAG</h1>
           </div>
           <div className="flex gap-2">
             <div className="relative group">
-              <button className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition text-sm">
-                Demo Cases
+              <button className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition text-xs lg:text-sm">
+                <span className="hidden sm:inline">Demo Cases</span>
+                <span className="sm:hidden">Demo</span>
               </button>
-              <div className="absolute top-full left-0 mt-1 bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 min-w-48">
+              <div className="absolute top-full right-0 lg:left-0 mt-1 bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 min-w-48 max-w-xs">
                 {demoData.map((demo, index) => (
                   <button
                     key={index}
                     onClick={() => fillDemoData(index)}
-                    className="w-full text-left px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-800 first:rounded-t-lg last:rounded-b-lg transition"
+                    className="w-full text-left px-3 py-2 text-xs lg:text-sm text-zinc-300 hover:bg-zinc-800 first:rounded-t-lg last:rounded-b-lg transition"
                   >
-                    Case {index + 1}: {demo.symptoms.substring(0, 40)}...
+                    Case {index + 1}: {demo.symptoms.substring(0, 30)}...
                   </button>
                 ))}
               </div>
             </div>
             <button
               onClick={() => router.push('/dashboard')}
-              className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-lg transition flex items-center gap-2"
+              className="px-3 lg:px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-lg transition flex items-center gap-1 lg:gap-2 text-xs lg:text-sm"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Dashboard
+              <ArrowLeft className="w-3 h-3 lg:w-4 lg:h-4" />
+              <span className="hidden sm:inline">Dashboard</span>
             </button>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
+      <div className="container mx-auto px-4 py-6 lg:py-8 max-w-3xl">
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between text-sm mb-2">
@@ -228,7 +229,7 @@ export default function NewDiagnosisPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-zinc-900/70 backdrop-blur border border-zinc-800 rounded-xl p-8">
+        <div className="bg-zinc-900/70 backdrop-blur border border-zinc-800 rounded-xl p-4 lg:p-8">
           {error && (
             <div className="bg-red-500/20 border border-red-400/50 text-red-400 px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
               <AlertCircle className="w-5 h-5" />
@@ -254,7 +255,7 @@ export default function NewDiagnosisPage() {
                     type="text"
                     value={patientName}
                     onChange={(e) => setPatientName(e.target.value)}
-                    className="w-full px-4 py-4 bg-zinc-900/50 backdrop-blur border border-zinc-700/50 text-zinc-50 placeholder:text-zinc-500 rounded-xl focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200"
+                    className="w-full px-4 py-3 lg:py-4 bg-zinc-900/50 backdrop-blur border border-zinc-700/50 text-zinc-50 placeholder:text-zinc-500 rounded-xl focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200 text-sm lg:text-base"
                     placeholder="John Doe"
                     required
                   />
