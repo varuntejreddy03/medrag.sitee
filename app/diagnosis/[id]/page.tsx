@@ -329,6 +329,22 @@ export default function DiagnosisDetailPage() {
                     )}
                   </div>
 
+                  {/* Clinical Presentation */}
+                  {parsedDiagnosis.clinical_presentation && (
+                    <div className="bg-zinc-950 rounded-lg p-6">
+                      <h4 className="text-lg font-semibold text-blue-300 mb-3">Clinical Presentation</h4>
+                      <p className="text-zinc-300 leading-relaxed">{cleanMarkdown(parsedDiagnosis.clinical_presentation)}</p>
+                    </div>
+                  )}
+
+                  {/* AI Medical Analysis */}
+                  {parsedDiagnosis.ai_medical_analysis && (
+                    <div className="bg-zinc-950 rounded-lg p-6">
+                      <h4 className="text-lg font-semibold text-purple-300 mb-3">AI Medical Analysis</h4>
+                      <p className="text-zinc-300 leading-relaxed">{cleanMarkdown(parsedDiagnosis.ai_medical_analysis)}</p>
+                    </div>
+                  )}
+
                   {/* Clinical Summary */}
                   {parsedDiagnosis.clinical_summary && (
                     <div className="bg-zinc-950 rounded-lg p-6">
@@ -389,18 +405,19 @@ export default function DiagnosisDetailPage() {
                     </div>
                   )}
 
-                  {/* Recommended Tests */}
-                  {parsedDiagnosis.recommended_tests && parsedDiagnosis.recommended_tests.length > 0 && (
+                  {/* Recommended Next Steps */}
+                  {parsedDiagnosis.recommended_next_steps && parsedDiagnosis.recommended_next_steps.length > 0 && (
                     <div className="bg-zinc-950 rounded-lg p-6">
-                      <h4 className="text-lg font-semibold text-cyan-300 mb-4">Recommended Tests</h4>
+                      <h4 className="text-lg font-semibold text-cyan-300 mb-4">Recommended Next Steps</h4>
                       <div className="space-y-3">
-                        {parsedDiagnosis.recommended_tests.map((t: any, i: number) => (
+                        {parsedDiagnosis.recommended_next_steps.map((t: any, i: number) => (
                           <div key={i} className="border border-zinc-800 rounded-lg p-4">
                             <div className="flex justify-between items-start mb-2">
-                              <h5 className="font-semibold text-white">{cleanMarkdown(t.test || t)}</h5>
+                              <h5 className="font-semibold text-white">{cleanMarkdown(t.investigation || t.test || t)}</h5>
                               {t.priority && (
                                 <span className={`text-xs px-2 py-1 rounded ${
-                                  t.priority === 'high' ? 'bg-red-500/20 text-red-300' :
+                                  t.priority === 'urgent' ? 'bg-red-500/20 text-red-300' :
+                                  t.priority === 'high' ? 'bg-orange-500/20 text-orange-300' :
                                   t.priority === 'medium' ? 'bg-yellow-500/20 text-yellow-300' :
                                   'bg-green-500/20 text-green-300'
                                 }`}>
@@ -408,8 +425,8 @@ export default function DiagnosisDetailPage() {
                                 </span>
                               )}
                             </div>
-                            {t.rationale && (
-                              <p className="text-sm text-zinc-400">{cleanMarkdown(t.rationale)}</p>
+                            {(t.clinical_indication || t.rationale) && (
+                              <p className="text-sm text-zinc-400">{cleanMarkdown(t.clinical_indication || t.rationale)}</p>
                             )}
                           </div>
                         ))}
@@ -441,22 +458,11 @@ export default function DiagnosisDetailPage() {
                     )}
                   </div>
 
-                  {/* Additional Information */}
-                  {(parsedDiagnosis.prognosis || parsedDiagnosis.patient_education) && (
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {parsedDiagnosis.prognosis && (
-                        <div className="bg-zinc-950 rounded-lg p-4">
-                          <h4 className="text-sm font-semibold text-yellow-300 mb-2">Prognosis</h4>
-                          <p className="text-zinc-300 text-sm">{cleanMarkdown(parsedDiagnosis.prognosis)}</p>
-                        </div>
-                      )}
-                      
-                      {parsedDiagnosis.patient_education && (
-                        <div className="bg-zinc-950 rounded-lg p-4">
-                          <h4 className="text-sm font-semibold text-green-300 mb-2">Patient Education</h4>
-                          <p className="text-zinc-300 text-sm">{cleanMarkdown(parsedDiagnosis.patient_education)}</p>
-                        </div>
-                      )}
+                  {/* Prognosis */}
+                  {parsedDiagnosis.prognosis && (
+                    <div className="bg-zinc-950 rounded-lg p-6">
+                      <h4 className="text-lg font-semibold text-yellow-300 mb-3">Prognosis</h4>
+                      <p className="text-zinc-300 leading-relaxed">{cleanMarkdown(parsedDiagnosis.prognosis)}</p>
                     </div>
                   )}
 

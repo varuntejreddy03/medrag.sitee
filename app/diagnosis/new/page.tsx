@@ -60,23 +60,23 @@ export default function NewDiagnosisPage() {
     setError('');
     setLoading(true);
     setLoadingProgress(10);
-    setLoadingMessage('🔄 Submitting patient data...');
+    setLoadingMessage('Submitting clinical data...');
 
     try {
       // Simulate progress updates
       setTimeout(() => {
         setLoadingProgress(30);
-        setLoadingMessage('🧠 Generating symptom embeddings...');
+        setLoadingMessage('Processing symptom analysis...');
       }, 1000);
       
       setTimeout(() => {
         setLoadingProgress(60);
-        setLoadingMessage('🔍 Searching medical database...');
+        setLoadingMessage('Searching medical knowledge base...');
       }, 2000);
       
       setTimeout(() => {
         setLoadingProgress(85);
-        setLoadingMessage('🤖 Generating AI diagnosis...');
+        setLoadingMessage('Generating clinical assessment...');
       }, 3000);
 
       const result = await api.createDiagnosis({
@@ -90,7 +90,7 @@ export default function NewDiagnosisPage() {
 
       if (result.id || result.session_id) {
         setLoadingProgress(100);
-        setLoadingMessage('✅ Diagnosis completed!');
+        setLoadingMessage('Clinical assessment completed');
         setSuccess(true);
         setTimeout(() => router.push(`/diagnosis/${result.id || result.session_id}`), 1500);
       }
@@ -111,12 +111,12 @@ export default function NewDiagnosisPage() {
             </div>
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
               <div className="px-4 py-1 bg-blue-500/20 border border-blue-500/30 text-blue-300 rounded-full text-sm font-medium">
-                🤖 AI Processing
+                AI Clinical Analysis
               </div>
             </div>
           </div>
           <div>
-            <h2 className="text-3xl font-bold text-white mb-3">Generating AI Diagnosis</h2>
+            <h2 className="text-3xl font-bold text-white mb-3">Clinical Analysis in Progress</h2>
             <p className="text-zinc-300 text-lg mb-4">{loadingMessage || 'Initializing medical analysis...'}</p>
           </div>
           <div className="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
@@ -128,14 +128,14 @@ export default function NewDiagnosisPage() {
           <div className="flex items-center justify-center gap-4 text-sm text-zinc-400">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-              <span>FAISS Vector Search</span>
+              <span>Medical Database Search</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-              <span>Gemini AI Analysis</span>
+              <span>AI Clinical Analysis</span>
             </div>
           </div>
-          <p className="text-xs text-zinc-500">This process typically takes 30-60 seconds</p>
+          <p className="text-xs text-zinc-500">Clinical analysis typically takes 15-30 seconds</p>
         </div>
       </div>
     );
@@ -148,8 +148,8 @@ export default function NewDiagnosisPage() {
           <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto">
             <Check className="w-10 h-10 text-white" />
           </div>
-          <h2 className="text-3xl font-bold text-white">Diagnosis Complete!</h2>
-          <p className="text-zinc-400">Redirecting to results...</p>
+          <h2 className="text-3xl font-bold text-white">Clinical Assessment Complete</h2>
+          <p className="text-zinc-400">Redirecting to clinical report...</p>
         </div>
       </div>
     );
@@ -166,7 +166,7 @@ export default function NewDiagnosisPage() {
           <div className="flex gap-2">
             <div className="relative group">
               <button className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition text-sm">
-                🧪 Demo
+                Demo Cases
               </button>
               <div className="absolute top-full left-0 mt-1 bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 min-w-48">
                 {demoData.map((demo, index) => (
@@ -409,7 +409,7 @@ export default function NewDiagnosisPage() {
 
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
                   <p className="text-sm text-blue-300">
-                    📧 Diagnosis report will be automatically sent to <strong>{patientEmail}</strong>
+                    Clinical assessment report will be automatically sent to <strong>{patientEmail}</strong>
                   </p>
                 </div>
               </div>
@@ -425,7 +425,7 @@ export default function NewDiagnosisPage() {
                   onClick={handleSubmit}
                   className="flex-1 bg-gradient-to-r from-emerald-500 to-green-500 hover:shadow-lg hover:shadow-emerald-500/25 text-white py-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2"
                 >
-                  Generate AI Diagnosis
+                  Generate Clinical Assessment
                   <Check className="w-5 h-5" />
                 </button>
               </div>

@@ -143,14 +143,14 @@ export default function DashboardPage() {
                 className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all duration-200 flex items-center gap-2 font-medium shadow-lg hover:shadow-emerald-500/25"
               >
                 <Zap className="w-4 h-4" />
-                Quick Demo
+                Demo Cases
               </button>
               <button
                 onClick={() => router.push('/diagnosis/new')}
                 className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-200 flex items-center gap-2 font-semibold"
               >
                 <Plus className="w-5 h-5" />
-                New Case
+                New Assessment
               </button>
               <button
                 onClick={async () => {
@@ -271,14 +271,14 @@ export default function DashboardPage() {
               <FileText className="w-16 h-16 text-zinc-700 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">No cases found</h3>
               <p className="text-white/60 mb-6">
-                {searchTerm ? 'Try a different search term' : 'Create your first diagnosis to get started'}
+                {searchTerm ? 'Try a different search term' : 'Create your first clinical assessment to get started'}
               </p>
               {!searchTerm && (
                 <button
                   onClick={() => router.push('/diagnosis/new')}
                   className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-lg transition"
                 >
-                  Create Diagnosis
+                  Create Assessment
                 </button>
               )}
             </div>
@@ -301,8 +301,8 @@ export default function DashboardPage() {
                             diagnosis.status === 'processing' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' :
                             'bg-red-500/20 text-red-300 border border-red-500/30'
                           }`}>
-                            {diagnosis.status === 'completed' ? '✓ Complete' : 
-                             diagnosis.status === 'processing' ? '⏳ Processing' : '✗ Failed'}
+                            {diagnosis.status === 'completed' ? 'Complete' : 
+                             diagnosis.status === 'processing' ? 'Processing' : 'Failed'}
                           </span>
                         </div>
                         <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-300 transition-colors duration-200">

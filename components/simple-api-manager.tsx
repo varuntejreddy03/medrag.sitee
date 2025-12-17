@@ -10,6 +10,8 @@ import { Key, Calendar, Save } from 'lucide-react';
 export function SimpleApiManager() {
   const [dob, setDob] = useState('');
   const [geminiKey, setGeminiKey] = useState('');
+  const [nvidiaKey, setNvidiaKey] = useState('');
+  const [groqKey, setGroqKey] = useState('');
   const [perplexityKey, setPerplexityKey] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -19,15 +21,23 @@ export function SimpleApiManager() {
     
     setLoading(true);
     try {
+      const payload: any = { dob };
+      if (provider === 'gemini') payload.gemini_key = key;
+      if (provider === 'nvidia') payload.nvidia_key = key;
+      if (provider === 'groq') payload.groq_key = key;
+      if (provider === 'perplexity') payload.perplexity_key = key;
+      
       const res = await fetch('/api/gi', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ dob, provider, api_key: key }),
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {
         setMessage(`${provider} API key updated successfully`);
         if (provider === 'gemini') setGeminiKey('');
+        if (provider === 'nvidia') setNvidiaKey('');
+        if (provider === 'groq') setGroqKey('');
         if (provider === 'perplexity') setPerplexityKey('');
       } else {
         const error = await res.json();
@@ -95,6 +105,54 @@ export function SimpleApiManager() {
         </div>
 
         <div className="space-y-2">
+          <Label htmlFor="groq-key" className="text-zinc-300">
+            Groq API Key (14.4K/day + 1K chat/day)
+          </Label>
+          <div className="flex gap-2">
+            <Input
+              id="groq-key"
+              type="password"
+              placeholder="Enter Groq API key"
+              value={groqKey}
+              onChange={(e) => setGroqKey(e.target.value)}
+              className="bg-zinc-950 border-zinc-800 text-zinc-50"
+            />
+            <Button
+              onClick={() => updateApiKey('groq', groqKey)}
+              disabled={loading || !groqKey.trim() || !dob}
+              size="sm"
+              className="bg-purple-600 hover:bg-purple-700"
+            >
+              <Save className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="nvidia-key" className="text-zinc-300">
+            NVIDIA API Key (40 rpm limit)
+          </Label>
+          <div className="flex gap-2">
+            <Input
+              id="nvidia-key"
+              type="password"
+              placeholder="Enter NVIDIA API key"
+              value={nvidiaKey}
+              onChange={(e) => setNvidiaKey(e.target.value)}
+              className="bg-zinc-950 border-zinc-800 text-zinc-50"
+            />
+            <Button
+              onClick={() => updateApiKey('nvidia', nvidiaKey)}
+              disabled={loading || !nvidiaKey.trim() || !dob}
+              size="sm"
+              className="bg-green-600 hover:bg-green-700"
+            >
+              <Save className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+
+        <div className="space-y-2">
           <Label htmlFor="perplexity-key" className="text-zinc-300">
             Perplexity API Key
           </Label>
@@ -120,7 +178,9 @@ export function SimpleApiManager() {
 
         <div className="text-xs text-zinc-500 mt-4">
           <Key className="w-3 h-3 inline mr-1" />
-          Secure API key management via /gi endpoint
+          Secure API key management via /gi endpoint<br/>
+          <span className="text-purple-400">🚀 Groq: 14.4K diagnosis + 1K chat/day</span><br/>
+          <span className="text-orange-400">⚠️ NVIDIA: 40 requests/minute limit</span>
         </div>
       </CardContent>
     </Card>
