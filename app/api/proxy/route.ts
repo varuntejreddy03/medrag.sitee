@@ -44,6 +44,11 @@ async function proxyRequest(request: NextRequest, endpoint: string) {
   }
 }
 
+// Handle /gi endpoint specifically
+export async function handleGiRequest(request: NextRequest) {
+  return proxyRequest(request, '/gi');
+}
+
 export async function GET(request: NextRequest) {
   return proxyRequest(request, '/auth/login');
 }
