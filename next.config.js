@@ -2,7 +2,7 @@
 const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: process.env.NODE_ENV === 'production' 
-      ? 'https://YOUR_SERVEO_URL.serveo.net' 
+      ? 'https://medrag-final.loca.lt' 
       : 'http://localhost:8000',
   },
   experimental: {
