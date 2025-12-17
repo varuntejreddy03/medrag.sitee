@@ -75,7 +75,7 @@ export function ChatWithDiagnosis({ diagnosisId, onClose }: ChatProps) {
     setLoading(true);
 
     try {
-      const data = await api.chatWithDiagnosis(diagnosisId, userMessage);
+      const data = await api.chatWithDiagnosis(diagnosisId.toString(), userMessage);
       
       const suggestions = [
         "Can you explain this in simpler terms?",
