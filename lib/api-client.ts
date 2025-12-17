@@ -96,7 +96,7 @@ class APIClient {
   }
 
   async createDiagnosis(data: DiagnosisRequest) {
-    const res = await fetch(`${API_URL}/api/v1/diagnosis/start`, {
+    const res = await fetch(`/api/proxy?path=/api/v1/diagnosis/start`, {
       method: 'POST',
       headers: this.getHeaders(),
       body: JSON.stringify(data),
@@ -106,7 +106,7 @@ class APIClient {
   }
 
   async getUserDiagnoses() {
-    const res = await fetch(`${API_URL}/api/v1/diagnosis`, {
+    const res = await fetch(`/api/proxy?path=/api/v1/diagnosis`, {
       headers: this.getHeaders(),
     });
     if (res.status === 401) throw new Error('Not authenticated');
@@ -115,7 +115,7 @@ class APIClient {
   }
 
   async getDiagnosis(id: string) {
-    const res = await fetch(`${API_URL}/api/v1/diagnosis/${id}`, {
+    const res = await fetch(`/api/proxy?path=/api/v1/diagnosis/${id}`, {
       headers: this.getHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
@@ -123,7 +123,7 @@ class APIClient {
   }
 
   async chatWithDiagnosis(diagnosisId: string, message: string) {
-    const res = await fetch(`${API_URL}/api/v1/diagnosis/${diagnosisId}/chat`, {
+    const res = await fetch(`/api/proxy?path=/api/v1/diagnosis/${diagnosisId}/chat`, {
       method: 'POST',
       headers: this.getHeaders(),
       body: JSON.stringify({ message }),
