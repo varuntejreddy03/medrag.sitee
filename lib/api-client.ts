@@ -144,6 +144,25 @@ class APIClient {
     const res = await fetch(`/api/proxy?path=/health`);
     return res.json();
   }
+
+  // Admin-only API key management
+  async updateApiKey(provider: string, apiKey: string) {
+    const res = await fetch(`/api/proxy?path=/admin/api-keys`, {
+      method: 'POST',
+      headers: this.getHeaders(),
+      body: JSON.stringify({ provider, api_key: apiKey }),
+    });
+    if (!res.ok) throw new Error('Failed to update API key');
+    return res.json();
+  }
+
+  async getApiKeyStatus() {
+    const res = await fetch(`/api/proxy?path=/admin/api-keys/status`, {
+      headers: this.getHeaders(),
+    });
+    if (!res.ok) throw new Error('Failed to get API key status');
+    return res.json();
+  }
 }
 
 export const api = new APIClient();

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api-client';
 import { Brain, Plus, FileText, Calendar, User, Loader2, LogOut, Activity, TrendingUp, Clock, Search, Filter, BarChart3, Stethoscope, Zap } from 'lucide-react';
+import { AdminSettings } from '@/components/admin-settings';
 
 interface Diagnosis {
   id: number;
@@ -237,6 +238,11 @@ export default function DashboardPage() {
               className="w-full pl-12 pr-4 py-4 bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-2xl text-zinc-50 placeholder:text-zinc-500 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
             />
           </div>
+        </div>
+
+        {/* Admin Settings - Only visible to admin users */}
+        <div className="mb-8">
+          <AdminSettings />
         </div>
 
         {/* Cases List */}
