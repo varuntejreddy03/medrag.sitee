@@ -37,7 +37,7 @@ class APIClient {
   }
 
   async signup(data: SignupData) {
-    const res = await fetch(`${API_URL}/auth/signup`, {
+    const res = await fetch(`/api/proxy?path=/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -47,7 +47,7 @@ class APIClient {
   }
 
   async verifyOtp(email: string, otp: string) {
-    const res = await fetch(`${API_URL}/auth/verify-otp`, {
+    const res = await fetch(`/api/proxy?path=/auth/verify-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, otp }),
@@ -60,7 +60,7 @@ class APIClient {
   }
 
   async verifyEmail(token: string) {
-    const res = await fetch(`${API_URL}/auth/verify-email?token=${token}`, {
+    const res = await fetch(`/api/proxy?path=/auth/verify-email?token=${token}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -88,7 +88,7 @@ class APIClient {
   }
 
   async getCurrentUser() {
-    const res = await fetch(`${API_URL}/auth/me`, {
+    const res = await fetch(`/api/proxy?path=/auth/me`, {
       headers: this.getHeaders(),
     });
     if (!res.ok) throw new Error('Not authenticated');
@@ -133,7 +133,7 @@ class APIClient {
   }
 
   async getDiagnosisStatus(id: string) {
-    const res = await fetch(`${API_URL}/api/v1/diagnosis/${id}/status`, {
+    const res = await fetch(`/api/proxy?path=/api/v1/diagnosis/${id}/status`, {
       headers: this.getHeaders(),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
@@ -141,7 +141,7 @@ class APIClient {
   }
 
   async healthCheck() {
-    const res = await fetch(`${API_URL}/health`);
+    const res = await fetch(`/api/proxy?path=/health`);
     return res.json();
   }
 }
